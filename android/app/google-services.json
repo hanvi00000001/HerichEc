@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "658260245210",
+    "project_id": "herichecommerce",
+    "storage_bucket": "herichecommerce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:658260245210:android:ec002f6ad05f6d454fc3e3",
+        "android_client_info": {
+          "package_name": "com.herichec"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "658260245210-7nevi7j51copa1j7urfpts4qpckja64v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.herichec",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "658260245210-av8c2o4kdmt4t2jjnp4fv7qia6489euv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2lRSVSm1nCZHhvzcaefEFcXG7QQFi844"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "658260245210-av8c2o4kdmt4t2jjnp4fv7qia6489euv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
