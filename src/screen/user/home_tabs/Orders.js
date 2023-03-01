@@ -1,11 +1,20 @@
-import {View, Text, StyleSheet, FlatList, Image} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import firestore from '@react-native-firebase/firestore';
 import Header from '../../common/Header';
+import {useIsFocused, useNavigation} from '@react-navigation/native';
 
 export default function Orders() {
+  const navigation = useNavigation([]);
   const [orderList, setOrderList] = useState([]);
   useEffect(() => {
     getOrders();
@@ -24,27 +33,47 @@ export default function Orders() {
         keyExtractor={({item, index}) => index}
         renderItem={({item, index}) => {
           return (
-            <View style={styles.orderItem}>
-              <FlatList
-                data={item.items}
-                renderItem={({item, index}) => {
-                  return (
-                    <View style={styles.itemView}>
-                      <Image
-                        source={{uri: item.data.imageUrl}}
-                        style={styles.itemImage}
-                      />
-                      <View>
-                        <Text style={styles.nameText}>{item.data.name}</Text>
-                        <Text style={styles.nameText}>
-                          {item.data.discountPrice + ' x' + item.data.qty}
-                        </Text>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('OrdersList', {
+                  //address: item.address,
+                  data1: item.data,
+                });
+              }}>
+              <View style={styles.orderItem}>
+                <FlatList
+                  data={item.items}
+                  renderItem={({item, index}) => {
+                    return (
+                      // <TouchableOpacity
+                      //   onPress={() => {
+                      //     navigation.navigate('OrdersList', {
+                      //       // imageUrl: item.data.imageUrl,
+                      //       // name: item.data.name,
+                      //       data: item.data,
+                      //     });
+                      //   }}>
+                      <View style={styles.itemView}>
+                        <Image
+                          source={{uri: item.data.imageUrl}}
+                          style={styles.itemImage}
+                        />
+                        <View>
+                          <Text style={styles.nameText}>{item.data.name}</Text>
+                          <Text style={styles.nameText}>
+                            {'₫' +
+                              item.data.discountPrice +
+                              ' x' +
+                              item.data.qty}
+                          </Text>
+                        </View>
                       </View>
-                    </View>
-                  );
-                }}
-              />
-            </View>
+                      // </TouchableOpacity>
+                    );
+                  }}
+                />
+              </View>
+            </TouchableOpacity>
           );
         }}
       />
@@ -66,18 +95,17 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   itemImage: {
-    width: 60,
-    height: 90,
+    width: 70,
+    height: 100,
     borderRadius: 10,
   },
   itemView: {
-    margin: 10,
+    margin: 3,
     width: '100%',
     flexDirection: 'row',
   },
   nameText: {
     fontSize: 16,
-    fontWeight: '600',
     color: '#000',
     marginLeft: 20,
     marginTop: 5,

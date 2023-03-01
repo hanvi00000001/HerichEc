@@ -17,19 +17,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useIsFocused, useNavigation} from '@react-navigation/native';
 let catId = '';
 export default function CategoriesCard() {
-  const [items, setItems] = useState([]);
+  const [cat, setCat] = useState([]);
   const navigation = useNavigation();
   const isFocused = useIsFocused();
 
   useEffect(() => {
-    getItem;
-  }, []);
-  // const subscriber =
-  const getItem = async () => {
-    const catId = await AsyncStorage.getItem('USERID');
+    // const subscriber =
     firestore()
-      .collection('items')
-      .doc(catId)
+      .collection('cat')
       .get()
       .then(querySnapshot => {
         console.log('Total users: ', querySnapshot.size);
@@ -45,45 +40,32 @@ export default function CategoriesCard() {
             data: documentSnapshot.data(),
           });
         });
-        setItems(tempData);
+        setCat(tempData);
       });
     // Stop listening for updates when no longer required
     // return () => subscriber();
-  };
+  }, []);
+
+  const getItems = async () => {};
 
   return (
     <View style={styles.container}>
       <View style={{marginTop: 1, marginBottom: 1}}>
-        {/* <FlatList
-          data={items}
-          horizontal
+        <FlatList
           showsHorizontalScrollIndicator={false}
+          horizontal
+          data={cat}
           renderItem={({item, index}) => {
             return (
               <View>
-                <TouchableOpacity
-                  style={{
-                    height: 40,
-                    borderRadius: 20,
-                    borderWidth: 1,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    marginLeft: 10,
-                  }}>
-                  <Text
-                    style={{
-                      color: '#000',
-                      marginLeft: 10,
-                      marginRight: 10,
-                    }}>
-                    df
-                  </Text>
+                <TouchableOpacity style={styles.touchableOpacity}>
+                  <Text style={styles.catname}>{item.data.name}</Text>
                 </TouchableOpacity>
               </View>
             );
           }}
-        /> */}
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+        />
+        {/* <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           <TouchableOpacity style={styles.touchableOpacity}>
             <Text style={styles.catname}>Áo Sơ Mi</Text>
           </TouchableOpacity>
@@ -108,7 +90,7 @@ export default function CategoriesCard() {
           <TouchableOpacity style={styles.touchableOpacity}>
             <Text style={styles.catname}>Phụ Kiện</Text>
           </TouchableOpacity>
-        </ScrollView>
+        </ScrollView> */}
       </View>
     </View>
   );
@@ -117,7 +99,7 @@ export default function CategoriesCard() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#8e8ee8e',
   },
   touchableOpacity: {
     height: 40,

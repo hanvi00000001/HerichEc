@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   View,
   ImageBackground,
+  Alert,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import firestore from '@react-native-firebase/firestore';
@@ -29,6 +30,7 @@ export default function UserLogin({navigation}) {
       .get()
       .then(querySnapshot => {
         setModalVisible(false);
+        Alert.alert('Thông báo', 'Đăng nhập thành công!');
         /* ... */
         console.log(querySnapshot.docs);
         if (querySnapshot.docs[0]._data !== null) {
@@ -47,8 +49,9 @@ export default function UserLogin({navigation}) {
       .catch(error => {
         setModalVisible(false);
         console.log(error);
-        alert(
-          'Tên tài khoản của bạn hoặc Mật khẩu không đúng, vui lòng thử lại',
+        Alert.alert(
+          'Thông Báo',
+          'Tên tài khoản của bạn hoặc Mật khẩu không đúng!',
         );
       });
   };
@@ -156,13 +159,13 @@ export default function UserLogin({navigation}) {
                 if (email !== '' && password !== '') {
                   adminLogin();
                 } else {
-                  alert('Vui lòng nhâp thông tin!');
+                  Alert.alert('Thông Báo', 'Vui lòng nhập đầy đủ thông tin!');
                 }
               }}>
               <Text style={styles.btnText}>Đăng nhập</Text>
             </TouchableOpacity>
 
-            <View
+            {/* <View
               style={{
                 marginTop: 20,
                 marginBottom: 10,
@@ -171,8 +174,8 @@ export default function UserLogin({navigation}) {
               <Text style={{color: '#000', fontSize: 20, fontWeight: 'bold'}}>
                 OR
               </Text>
-            </View>
-            <View
+            </View> */}
+            {/* <View
               style={{
                 marginHorizontal: 10,
                 marginTop: 10,
@@ -197,7 +200,7 @@ export default function UserLogin({navigation}) {
                 iconSize={24}
                 iconType="font-awesome"
               />
-            </View>
+            </View> */}
           </View>
         </View>
 
@@ -247,7 +250,7 @@ const styles = StyleSheet.create({
     top: 20,
   },
   loginBtn: {
-    backgroundColor: colors.buttonssmall,
+    backgroundColor: colors.grey0,
     width: '90%',
     height: 60,
     alignSelf: 'center',

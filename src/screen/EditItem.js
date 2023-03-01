@@ -28,6 +28,8 @@ export default function EditItem({navigation}) {
     route.params.data.discountPrice,
   );
   const [description, setDescription] = useState(route.params.data.description);
+
+  const [destitle, setDestitle] = useState(route.params.data.destitle);
   const [itmId, setItmId] = useState(route.params.data.itmId);
   const [imageUrl, setImageUrl] = useState('');
   const [categories, setCategories] = useState(route.params.data.categories); //2
@@ -98,6 +100,7 @@ export default function EditItem({navigation}) {
         price: price,
         discountPrice: discountPrice,
         description: description,
+        destitle: destitle,
         imageUrl: route.params.data.imageUrl + '',
         categories: categories, //1
         catId: catId,
@@ -112,9 +115,9 @@ export default function EditItem({navigation}) {
 
   return (
     <View style={styles.container}>
-      <ScrollView style={styles.container}>
+      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
-          <Text style={styles.headerText}>Edit Item</Text>
+          <Text style={styles.headerText}>Sửa thông tin sản phẩm</Text>
         </View>
         {imageData !== null ? (
           <Image
@@ -145,7 +148,7 @@ export default function EditItem({navigation}) {
           onChangeText={text => setItmId(text)}
         />
         <TextInput
-          placeholder="Loại sản phẩm"
+          placeholder="Cat"
           style={styles.inputStyle}
           value={categories}
           onChangeText={text => setCategories(text)}
@@ -157,25 +160,31 @@ export default function EditItem({navigation}) {
           onChangeText={text => setCatId(text)}
         />
         <TextInput
-          placeholder="Item Name"
+          placeholder="Tên sản phẩm"
           style={styles.inputStyle}
           value={name}
           onChangeText={text => setName(text)}
         />
         <TextInput
-          placeholder="Item Price"
+          placeholder="Giá sản phẩm"
           style={styles.inputStyle}
           value={price}
           onChangeText={text => setPrice(text)}
         />
         <TextInput
-          placeholder="Item Discount Price"
+          placeholder="Giảm giá"
           style={styles.inputStyle}
           value={discountPrice}
           onChangeText={text => setDiscountPrice(text)}
         />
         <TextInput
-          placeholder="Item Description"
+          placeholder="Tiêu đề mô tả"
+          style={styles.inputStyle}
+          value={destitle}
+          onChangeText={text => setDestitle(text)}
+        />
+        <TextInput
+          placeholder="Mô tả"
           style={styles.inputStyle}
           value={description}
           onChangeText={text => setDescription(text)}
@@ -211,6 +220,7 @@ export default function EditItem({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#fff',
   },
   header: {
     height: 60,
@@ -244,6 +254,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 20,
+    marginBottom: 300,
   },
   uploadBtn: {
     //backgroundColor: colors.buttonssmall,
@@ -257,8 +268,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   imageStyle: {
-    width: '90%',
-    height: 900,
+    width: '30%',
+    height: '20%',
     borderRadius: 10,
     alignSelf: 'center',
     marginTop: 20,

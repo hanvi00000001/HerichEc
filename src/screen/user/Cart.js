@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   SafeAreaView,
   ScrollView,
+  Alert,
   Appearance,
 } from 'react-native';
 import {colors} from '../../global/styles';
@@ -107,7 +108,21 @@ export default function Cart({navigation}) {
               />
               <TouchableOpacity
                 onPress={() => {
-                  deleteItem(index);
+                  Alert.alert('Xoá?', 'Xoá sản phẩm này khỏi giỏ hàng?', [
+                    // The "Yes" button
+                    {
+                      text: 'Xoá',
+                      onPress: () => {
+                        //deleteItem(item.id);
+                        deleteItem(index);
+                      },
+                    },
+                    // The "No" button
+                    // Does nothing but dismiss the dialog when tapped
+                    {
+                      text: 'Trở lại',
+                    },
+                  ]);
                 }}
                 style={{
                   position: 'absolute',

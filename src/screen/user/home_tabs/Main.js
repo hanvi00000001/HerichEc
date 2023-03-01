@@ -48,6 +48,7 @@ export default function Main() {
   const navigation = useNavigation();
   const isFocused = useIsFocused();
   const route = useRoute();
+  const [refresh, setRefresh] = React.useState(0);
 
   useEffect(() => {
     // const subscriber =
@@ -230,22 +231,7 @@ export default function Main() {
         <View style={{width: '100%', height: 300}}>
           <Swiper autoplay={true}>
             <Image
-              source={require('../../../images/banner1.png')}
-              style={{
-                width: '100%',
-                height: 300,
-              }}
-            />
-            <Image
-              source={require('../../../images/banner2.png')}
-              style={{
-                width: '100%',
-                height: 300,
-              }}
-            />
-
-            <Image
-              source={require('../../../images/banner3.png')}
+              source={require('../../../images/banner.jpg')}
               style={{
                 width: '100%',
                 height: 300,
@@ -254,16 +240,8 @@ export default function Main() {
           </Swiper>
         </View>
 
-        <View style={{marginTop: 20, marginLeft: 10}}>
-          <Text
-            style={{
-              fontSize: 20,
-              color: theme === 'LIGHT' ? '#000' : '#fff',
-              fontWeight: 'bold',
-            }}>
-            {'Sản Phẩm Mới  -  Ưu Đãi Hời'}
-          </Text>
-        </View>
+        <CategoriesCard />
+
         <FlatList
           showsHorizontalScrollIndicator={false}
           horizontal
@@ -287,18 +265,8 @@ export default function Main() {
                   }}
                   onPress={() => {
                     navigation.navigate('ProductsDetail', {
-                      // data: items,
-                      itmId: item.data.itmId,
-                      name: item.data.name,
-                      price: item.data.price,
-                      discountPrice: item.data.discountPrice,
-                      description: item.data.description,
-                      imageUrl: item.data.imageUrl,
-                      destitle: item.data.destitle,
-                      slide1: item.data.slide1,
-                      slide2: item.data.slide2,
-                      slide3: item.data.slide3,
-                      slide4: item.data.slide4,
+                      data: item.data,
+                      id: item.id,
                     });
                   }}>
                   <View
@@ -325,6 +293,7 @@ export default function Main() {
                         fontWeight: '600',
                       }}>
                       {item.data.name}
+                      {item.data.categories}
                     </Text>
 
                     <View
@@ -396,6 +365,9 @@ export default function Main() {
             );
           }}
         />
+
+        <View style={{marginTop: 20, marginLeft: 10}}></View>
+
         <View style={{marginTop: 20, marginLeft: 10}}>
           <Text
             style={{

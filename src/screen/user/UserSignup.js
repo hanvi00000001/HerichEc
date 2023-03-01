@@ -24,6 +24,21 @@ export default function UserSignup({navigation}) {
   const [modalVisible, setModalVisible] = useState(false);
   const [isSecureEntry, setIsSecureEntry] = useState(true);
 
+  const [seePass, setSeePass] = useState(true);
+  const [checkValidEmail, setCheckValidEmail] = useState(false);
+
+  const handleCheckEmail = txt => {
+    let re = /\S+@\S+\.\S+/;
+    let regex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+
+    setEmail(txt);
+    if (re.test(txt) || regex.test(txt)) {
+      setCheckValidEmail(false);
+    } else {
+      setCheckValidEmail(true);
+    }
+  };
+
   const saveUser = () => {
     setModalVisible(true);
     const userId = uuid.v4();
@@ -39,10 +54,12 @@ export default function UserSignup({navigation}) {
         cart: [],
         wish: [],
         address: [],
+        orders: [],
         profilePic: '',
       })
       .then(res => {
         setModalVisible(false);
+        Alert.alert('Thông báo', 'Đăng ký thành công!');
         navigation.navigate('UserLogin');
       })
       .catch(error => {
@@ -93,8 +110,7 @@ export default function UserSignup({navigation}) {
             Đăng nhập
           </Text>
         </View>
-        <View>
-          {}
+        <View style={{marginTop: 30}}>
           <View style={styles.view10}>
             <View>
               <Icon
@@ -109,6 +125,7 @@ export default function UserSignup({navigation}) {
                 style={styles.inputStyle}
                 placeholder={'Tên'}
                 value={name}
+                maxLength={30}
                 onChangeText={txt => setName(txt)}
               />
             </View>
@@ -129,10 +146,17 @@ export default function UserSignup({navigation}) {
                 style={styles.inputStyle}
                 placeholder={'Email'}
                 value={email}
-                onChangeText={txt => setEmail(txt)}
+                //onChangeText={txt => setEmail(txt)}
+                onChangeText={txt => handleCheckEmail(txt)}
               />
             </View>
           </View>
+          {checkValidEmail ? (
+            <Text style={styles.textFailed}>Email không hợp lệ</Text>
+          ) : (
+            <Text style={styles.textFailed}></Text>
+          )}
+
           <View style={styles.view10}>
             <View>
               <Icon
@@ -169,6 +193,7 @@ export default function UserSignup({navigation}) {
                 style={styles.inputStyle}
                 placeholder={'Mật khẩu'}
                 value={password}
+                maxLength={16}
                 onChangeText={txt => setPassword(txt)}
               />
               <Icon
@@ -182,29 +207,30 @@ export default function UserSignup({navigation}) {
               />
             </View>
           </View>
+        </View>
+        <TouchableOpacity
+          style={styles.loginBtn}
+          onPress={() => {
+            if (
+              email !== '' &&
+              // password !== '' &&
+              password.length > 8 &&
+              name !== '' &&
+              mobile !== '' &&
+              mobile.length > 9
+            ) {
+              saveUser();
+            } else {
+              Alert.alert(
+                'THÔNG BÁO',
+                'Vui lòng điền đầy đủ thông tin đăng ký!',
+              );
+            }
+          }}>
+          <Text style={styles.btnText}>Đăng Ký</Text>
+        </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.loginBtn}
-            onPress={() => {
-              if (
-                email !== '' &&
-                password !== '' &&
-                name !== '' &&
-                mobile !== '' &&
-                mobile.length > 9
-              ) {
-                saveUser();
-              } else {
-                Alert.alert(
-                  'THÔNG BÁO',
-                  'Vui lòng điền đầy đủ thông tin đăng ký!',
-                );
-              }
-            }}>
-            <Text style={styles.btnText}>Đăng Ký</Text>
-          </TouchableOpacity>
-
-          <View
+        {/* <View
             style={{
               marginTop: 20,
               marginBottom: 10,
@@ -213,8 +239,8 @@ export default function UserSignup({navigation}) {
             <Text style={{color: '#000', fontSize: 20, fontWeight: 'bold'}}>
               OR
             </Text>
-          </View>
-          <View
+          </View> */}
+        {/* <View
             style={{
               marginHorizontal: 10,
               marginTop: 10,
@@ -239,8 +265,7 @@ export default function UserSignup({navigation}) {
               iconSize={24}
               iconType="font-awesome"
             />
-          </View>
-        </View>
+          </View> */}
 
         <Loader modalVisible={modalVisible} setModalVisible={setModalVisible} />
       </View>
@@ -257,8 +282,12 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     color: colors.grey0,
     alignSelf: 'flex-start',
-    marginTop: 20,
+    marginTop: 30,
     marginLeft: 20,
+  },
+  textFailed: {
+    alignSelf: 'flex-end',
+    color: 'red',
   },
   view10: {
     flexDirection: 'row',
@@ -291,12 +320,12 @@ const styles = StyleSheet.create({
     top: 20,
   },
   loginBtn: {
-    backgroundColor: '#D83E64',
+    backgroundColor: colors.grey0,
     width: '90%',
-    height: 50,
+    height: 60,
     alignSelf: 'center',
     borderRadius: 10,
-    marginTop: 40,
+    marginTop: 60,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -312,11 +341,13 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     color: colors.buttonssmall,
     fontWeight: 'bold',
+    marginTop: 20,
   },
   noAccount: {
     fontSize: 16,
     alignSelf: 'center',
     color: colors.grey1,
+    marginTop: 20,
   },
   SocialIcon: {
     height: 50,

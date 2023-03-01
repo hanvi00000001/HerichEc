@@ -128,7 +128,7 @@ export default function EditProfile({navigation}) {
           </View>
           <View style={styles.view11}>
             <TextInput
-              placeholder="Tên"
+              placeholder="Email"
               style={styles.inputStyle}
               value={email}
               onChangeText={text => setEmail(text)}

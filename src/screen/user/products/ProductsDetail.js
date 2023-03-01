@@ -27,15 +27,39 @@ export default function ProductsDetail() {
   const [cartCount, setCartCount] = useState(0);
   const isFocused = useIsFocused();
   const navigation = useNavigation([]);
+  const [select, setSelect] = useState(0);
 
   const [items, setItems] = useState([]);
   const [itemData, setItemData] = useState([]);
   const [loading, setLoading] = useState(true);
   const route = useRoute();
 
-  const [name, setName] = useState(route.params.name);
-  const [price, setPrice] = useState(route.params.price);
-  const [userData, setUserData] = useState(null);
+  //const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    // const subscriber =
+    firestore()
+      .collection('items')
+      .get()
+      .then(querySnapshot => {
+        console.log('Total users: ', querySnapshot.size);
+        let tempData = [];
+        querySnapshot.forEach(documentSnapshot => {
+          console.log(
+            'User ID: ',
+            documentSnapshot.id,
+            documentSnapshot.data(),
+          );
+          tempData.push({
+            id: documentSnapshot.id,
+            data: documentSnapshot.data(),
+          });
+        });
+        setItems(tempData);
+      });
+    // Stop listening for updates when no longer required
+    // return () => subscriber();
+  }, []);
 
   useEffect(() => {
     getCartItems();
@@ -48,8 +72,13 @@ export default function ProductsDetail() {
 
   const onAddToCart = async (item, index) => {
     const user = await firestore().collection('users').doc(userId).get();
+    const items = await firestore()
+      .collection('items')
+      .doc(route.params.id)
+      .get();
     console.log(user._data.cart);
     let tempDart = [];
+    //id = route.params.id;
 
     tempDart = user._data.cart;
     if (tempDart.length > 0) {
@@ -119,22 +148,22 @@ export default function ProductsDetail() {
             <Swiper style={{height: 550}}>
               <Image
                 style={styles.itemImage}
-                source={{uri: route.params.imageUrl}}
+                source={{uri: route.params.data.imageUrl}}
               />
               <Image
-                source={{uri: route.params.slide1}}
+                source={{uri: route.params.data.slide1}}
                 style={styles.itemImage}
               />
               <Image
-                source={{uri: route.params.slide2}}
+                source={{uri: route.params.data.slide2}}
                 style={styles.itemImage}
               />
               <Image
-                source={{uri: route.params.slide3}}
+                source={{uri: route.params.data.slide3}}
                 style={styles.itemImage}
               />
               <Image
-                source={{uri: route.params.slide4}}
+                source={{uri: route.params.data.slide4}}
                 style={styles.itemImage}
               />
             </Swiper>
@@ -151,7 +180,7 @@ export default function ProductsDetail() {
               fontWeight: 'bold',
               marginBottom: 10,
             }}>
-            {route.params.name}
+            {route.params.data.name}
           </Text>
           <View style={{flexDirection: 'row'}}>
             <Text
@@ -162,22 +191,6 @@ export default function ProductsDetail() {
               }}>
               Còn hàng
             </Text>
-            <TouchableOpacity
-              style={{
-                width: 30,
-                height: 30,
-                //backgroundColor: '#fff',
-                justifyContent: 'center',
-                alignItems: 'center',
-                marginLeft: 15,
-                bottom: 5,
-              }}
-              onPress={() => {}}>
-              <Image
-                source={require('../../../images/wish.png')}
-                style={{width: 30, height: 30, tintColor: colors.buttonssmall}}
-              />
-            </TouchableOpacity>
           </View>
           <View
             style={{
@@ -191,7 +204,7 @@ export default function ProductsDetail() {
                 color: colors.buttonssmall,
                 fontWeight: 'bold',
               }}>
-              {'₫' + route.params.discountPrice}
+              {'₫' + route.params.data.discountPrice}
             </Text>
             <Text
               style={{
@@ -201,7 +214,7 @@ export default function ProductsDetail() {
                 textDecorationLine: 'line-through',
                 textAlignVertical: 'center',
               }}>
-              {'₫' + route.params.price}
+              {'₫' + route.params.data.price}
             </Text>
           </View>
           <View
@@ -227,9 +240,12 @@ export default function ProductsDetail() {
               justifyContent: 'space-evenly',
               flexDirection: 'row',
             }}>
-            <TouchableOpacity style={styles.tousize}>
+            {/* <Button title="XS" style={styles.tousize} color="#fff" /> */}
+
+            <TouchableOpacity style={[styles.tousize, {}]}>
               <Text style={styles.sizetext}>XS</Text>
             </TouchableOpacity>
+
             <TouchableOpacity style={styles.tousize}>
               <Text style={styles.sizetext}>S</Text>
             </TouchableOpacity>
@@ -262,7 +278,7 @@ export default function ProductsDetail() {
                 textAlign: 'center',
                 marginBottom: 10,
               }}>
-              {route.params.destitle}
+              {route.params.data.destitle}
             </Text>
             <Text
               style={{
@@ -272,17 +288,9 @@ export default function ProductsDetail() {
                 color: colors.grey0,
                 marginBottom: 20,
               }}>
-              {route.params.description}
+              {route.params.data.description}
             </Text>
           </View>
-          {/* <Image
-            style={styles.itemImage}
-            source={{uri: route.params.imageUrl}}
-          />
-          <Text style={{color: '#000'}}>drfgthyjuk {route.params.name} </Text>
-          <Text style={{color: '#000'}}>
-            drfgthyjuk {route.params.description}
-          </Text> */}
         </View>
       </ScrollView>
 
@@ -319,39 +327,6 @@ export default function ProductsDetail() {
           }}
         />
       </TouchableOpacity>
-
-      {/* <TouchableOpacity
-        style={{
-          backgroundColor: colors.buttonssmall,
-          width: '100%',
-          height: 50,
-          justifyContent: 'center',
-          alignItems: 'center',
-          flexDirection: 'row',
-          alignSelf: 'center',
-          borderRadius: 40,
-        }}
-        onPress={() => {
-          onAddToCart();
-        }}>
-        <Text
-          style={{
-            color: colors.headerText,
-            fontSize: 20,
-            fontWeight: 'bold',
-          }}>
-          Thêm vào giỏ hàng
-        </Text>
-        <Image
-          source={require('../../../images/cart.png')}
-          style={{
-            marginLeft: 10,
-            width: 30,
-            height: 30,
-            tintColor: colors.headerText,
-          }}
-        />
-      </TouchableOpacity> */}
     </View>
   );
 }
@@ -441,11 +416,11 @@ const styles = StyleSheet.create({
   },
   tousize: {
     justifyContent: 'center',
-    borderRadius: 20,
+    //borderRadius: 20,
     width: 40,
     height: 40,
-    borderWidth: 1,
-    borderColor: colors.grey3,
+    borderWidth: 0.6,
+    borderColor: colors.grey4,
     alignItems: 'center',
   },
   sizetext: {

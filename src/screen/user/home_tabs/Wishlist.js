@@ -70,7 +70,7 @@ export default function Wish() {
         numColumns={2}
         style={{marginBottom: 80, marginRight: 5}}
         horizontal={false}
-        showsHorizontalScrollIndicator={true}
+        showsVerticalScrollIndicator={false}
         data={wishList}
         renderItem={({item, index}) => {
           return (

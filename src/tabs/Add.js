@@ -17,6 +17,8 @@ import firestore from '@react-native-firebase/firestore';
 import {SelectList} from 'react-native-dropdown-select-list';
 import {useRoute} from '@react-navigation/native';
 import uuid from 'react-native-uuid';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Item} from 'react-native-paper/lib/typescript/components/Drawer/Drawer';
 
 export default function Add() {
   const [imageData, setImageData] = useState(null);
@@ -27,20 +29,20 @@ export default function Add() {
   const [destitle, setDestitle] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [slide0, setSlide0] = useState('');
-  const [categories, setCategories] = useState(''); //2
+  //const [categories, setCategories] = useState(''); //2
   const [catId, setCatId] = useState('');
   const [itmId, setItmId] = useState('');
 
-  // const categories = [
-  //   {key: '1', value: 'Sơ mi'},
-  //   {key: '2', value: 'Đầm'},
-  //   {key: '3', value: 'Quần dài'},
-  //   {key: '4', value: 'Set đồng bộ'},
-  //   {key: '5', value: 'Khoác ngoài'},
-  //   {key: '6', value: 'Phụ kiện'},
-  //  {key: '7', value: 'chân váy'},
-  //{key: '8', value: 'áo dài'},
-  // ];
+  const cat = [
+    {key: '1', value: '1 Sơ mi '},
+    {key: '2', value: '2 Đầm '},
+    {key: '3', value: '3 Quần dài '},
+    {key: '4', value: '4 Set đồng bộ '},
+    {key: '5', value: '5 Khoác ngoài '},
+    {key: '6', value: '6 Phụ kiện '},
+    {key: '7', value: '7 Chân váy '},
+    {key: '8', value: '8 -Áo dài'},
+  ];
   const [selected, setSelected] = React.useState('');
   const route = useRoute();
 
@@ -98,10 +100,9 @@ export default function Add() {
         description: description,
         destitle: destitle,
         imageUrl: url + '',
-        categories: categories,
+        // categories: categories,
         catId: catId, //1
         qty: 1,
-        itmId: itmId,
       })
       // .doc(itemId)
       // .set({itemId: itemId})
@@ -109,6 +110,15 @@ export default function Add() {
         console.log('User added!');
       });
   };
+
+  // const saveCat = async () => {
+  // //   try {
+  // //     const value = await firestore.getItem('key');
+  // //     if (value !== null) {
+  // //       console.log(value);
+  // //     }
+  // //   } catch (error) {}
+  // // };
 
   return (
     <View style={styles.container}>
@@ -123,14 +133,14 @@ export default function Add() {
           />
         ) : null}
 
-        {/* <SelectList
-        //onSelect=
-          data={categories}
-          value={category}
+        <SelectList
+          data={cat}
           setSelected={setSelected}
           dropdownTextStyles={{color: colors.grey0}}
+          TextStyles={{color: colors.grey0}}
           placeholder="Phân Loại"
           dropdownStyles={{width: '90%', alignSelf: 'center'}}
+          defaultOption={{key: '5', value: '5 khoác ngoài'}}
           boxStyles={{
             paddingHorizontal: 20,
             marginTop: 60,
@@ -139,22 +149,22 @@ export default function Add() {
             height: 50,
             alignSelf: 'center',
           }}
-        /> */}
+        />
 
-        <TextInput
+        {/* <TextInput
           placeholder="Id"
           style={styles.inputStyle}
           value={itmId}
           onChangeText={text => setItmId(text)}
-        />
-        <TextInput
-          placeholder="Cat"
+        /> */}
+        {/* <TextInput
+          placeholder="phân loại"
           style={styles.inputStyle}
           value={categories}
           onChangeText={text => setCategories(text)}
-        />
+        /> */}
         <TextInput
-          placeholder="Cat Id"
+          placeholder="Id loại"
           style={styles.inputStyle}
           value={catId}
           onChangeText={text => setCatId(text)}
@@ -192,7 +202,7 @@ export default function Add() {
           onChangeText={text => setDescription(text)}
         />
         <TextInput
-          placeholder="URL"
+          placeholder="Đường dẫn ảnh"
           style={styles.inputStyle}
           value={imageUrl}
           onChangeText={text => setImageUrl(text)}
@@ -204,7 +214,7 @@ export default function Add() {
             color: colors.grey0,
             fontWeight: 'bold',
           }}>
-          OR
+          Hoặc
         </Text>
         <TouchableOpacity
           style={styles.pickBtn}
@@ -220,7 +230,7 @@ export default function Add() {
           uploadImage();
         }}>
         <Text style={{color: '#000', fontSize: 20, fontWeight: 'bold'}}>
-          Upload sản phẩm
+          Thêm sản phẩm
         </Text>
       </TouchableOpacity>
     </View>

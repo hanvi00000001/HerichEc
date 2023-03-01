@@ -11,15 +11,17 @@ import {
   Image,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
-import firestore from '@react-native-firebase/firestore';
+import firestore, {firebase} from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useRoute} from '@react-navigation/native';
 import uuid from 'react-native-uuid';
 import {colors} from '../../../global/styles';
-import {Icon} from '@rneui/themed';
+import {Icon, Button} from '@rneui/themed';
 import {useIsFocused, useNavigation} from '@react-navigation/native';
 import Header from '../../common/Header';
+
+import {signOutAction} from '../../actions';
 
 let userId = '';
 export default function Profile() {
@@ -34,7 +36,6 @@ export default function Profile() {
   const [cartCount, setCartCount] = useState(0);
   const [wishCount, setWishCount] = useState(0);
   const [imageData, setImageData] = useState(null);
-  // const [userData, setUserData] = useState(null);
 
   useEffect(() => {
     getUser();
@@ -58,6 +59,15 @@ export default function Profile() {
     // return () => subscriber();
   };
 
+  const signOut = async () => {
+    try {
+      await firebase.auth().signOut();
+      navigation.navigate('SelectLogin');
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   useEffect(() => {
     getCartItems();
   }, [isFocused]);
@@ -75,6 +85,8 @@ export default function Profile() {
     setWishCount(user._data.wish.length);
   };
 
+  const logout = async () => {};
+
   //
   return (
     <View style={styles.container}>
@@ -87,10 +99,10 @@ export default function Profile() {
                 marginBottom: 20,
                 width: '85%',
               }}>
-              <Image
+              {/* <Image
                 source={{uri: usersData.profilePic}}
                 style={styles.userImg}
-              />
+              /> */}
               {/* {imageData !== null ? (
                 <Image
                   source={{uri: usersData.profilePic}}
@@ -103,6 +115,21 @@ export default function Profile() {
                   //  source={{uri: item.data.imageUrl}}
                 />
               )} */}
+
+              <View style={{borderRadius: 60, borderWidth: 0.8}}>
+                {imageData == null ? (
+                  <Image
+                    source={{uri: usersData.profilePic}}
+                    style={styles.userImg}
+                  />
+                ) : (
+                  <Image
+                    style={styles.userImg}
+                    source={require('../../../images/image.png')}
+                    //  source={{uri: item.data.imageUrl}}
+                  />
+                )}
+              </View>
 
               <Text style={styles.userName}>{usersData.name}</Text>
             </View>
@@ -154,19 +181,26 @@ export default function Profile() {
               <Text style={styles.userInfoSubTitle}>Giỏ hàng</Text>
             </View>
           </View>
-          <View style={styles.userInfoItem}>
-            <Text style={styles.userInfoTitle}>
-              {wishCount ? wishCount : '0'}
-            </Text>
-            <View style={{flexDirection: 'row'}}>
-              <Icon
-                type="material"
-                name="favorite-border"
-                iconStyle={{color: colors.buttonssmall}}
-              />
-              <Text style={styles.userInfoSubTitle}>Đã thích</Text>
+
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('Wish');
+            }}>
+            <View style={styles.userInfoItem}>
+              <Text style={styles.userInfoTitle}>
+                {wishCount ? wishCount : '0'}
+              </Text>
+
+              <View style={{flexDirection: 'row'}}>
+                <Icon
+                  type="material"
+                  name="favorite-border"
+                  iconStyle={{color: colors.buttonssmall}}
+                />
+                <Text style={styles.userInfoSubTitle}>Đã thích</Text>
+              </View>
             </View>
-          </View>
+          </TouchableOpacity>
         </View>
 
         <View style={{}}>
@@ -249,8 +283,20 @@ export default function Profile() {
             <Text style={styles.sub}>Giới thiệu về Herich</Text>
           </TouchableOpacity>
         </View>
-        <View style={{marginBottom: 200}}>
-          <TouchableOpacity style={styles.infor} onPress={() => {}}>
+        {/* <View style={{marginBottom: 200}}>
+          <TouchableOpacity
+            style={{
+              width: '100%',
+              height: 48,
+
+              flexDirection: 'row',
+              borderWidth: 0.5,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+            onPress={() => {
+              signOut();
+            }}>
             <Icon
               type="material"
               name="logout"
@@ -259,6 +305,20 @@ export default function Profile() {
             />
             <Text style={styles.sub}>Đăng xuất</Text>
           </TouchableOpacity>
+        </View> */}
+
+        <View style={{marginBottom: 200}}>
+          <Button
+            radius={'sm'}
+            buttonStyle={{backgroundColor: 'rgba(39, 39, 39, 1)'}}
+            containerStyle={{
+              width: '100%',
+              marginVertical: 10,
+            }}
+            titleStyle={{color: 'white', marginHorizontal: 10}}>
+            <Icon name="logout" color="white" />
+            Đăng xuất
+          </Button>
         </View>
       </ScrollView>
     </View>
@@ -275,6 +335,7 @@ const styles = StyleSheet.create({
     height: 120,
     width: 120,
     borderRadius: 60,
+    borderWidth: 0.8,
   },
   userName: {
     fontSize: 25,
@@ -336,5 +397,5 @@ const styles = StyleSheet.create({
     color: '#666',
     textAlign: 'center',
   },
-  inforIcon: {marginRight: 5, color: colors.buttonssmall},
+  inforIcon: {marginRight: 5, color: colors.grey0},
 });

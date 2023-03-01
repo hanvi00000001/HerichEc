@@ -86,6 +86,7 @@ export default function Search() {
   //   }
   // };
   const searchFilterFunction = text => {
+    //setData
     // Check if searched text is not blank
     if (text !== '') {
       let tempDatr = items.filter(item => {
@@ -96,6 +97,12 @@ export default function Search() {
       setItems(oldData);
     }
   };
+
+  // const [searchText, setSearchText] = useState('');
+  // const filterred = () =>
+  //   items.filter(each =>
+  //     each.name.toLowerCase().includes(searchText.toLowerCase()),
+  //   );
 
   return (
     <View style={{flex: 1, backgroundColor: '#fff'}}>
@@ -112,29 +119,33 @@ export default function Search() {
           width: '100%',
           flexDirection: 'row',
           alignItems: 'center',
-          height: 70,
+          height: 55,
           justifyContent: 'space-between',
+          marginTop: 10,
         }}>
         <View
           style={{
-            width: '80%',
-            height: 50,
-            borderRadius: 10,
+            width: '87%',
+            height: 55,
+            borderRadius: 5,
             borderWidth: 0.2,
             flexDirection: 'row',
             alignItems: 'center',
-            marginLeft: 15,
+            marginLeft: 5,
           }}>
           <Image
             source={require('../../../images/search.png')}
-            style={{width: 24, height: 24, marginLeft: 15, opacity: 0.5}}
+            style={{width: 24, height: 30, marginLeft: 10, opacity: 0.5}}
           />
           <TextInput
-            placeholder="tìm kiếm sản phẩm..."
-            style={{width: '76%', height: 50}}
+            maxLength={40}
+            autoCorrect={true}
+            placeholder="Tìm kiếm sản phẩm..."
+            style={{width: '80%', height: 55, color: '#000'}}
             onChangeText={txt => {
               searchFilterFunction(txt);
               setSearch(txt);
+              //setSearchText(txt);
             }}
             ref={searchRef}
             value={search}
@@ -149,7 +160,7 @@ export default function Search() {
               }}>
               <Image
                 source={require('../../../images/dele.png')}
-                style={{width: 16, height: 16, opacity: 0.5}}
+                style={{width: 20, height: 20, opacity: 0.5}}
               />
             </TouchableOpacity>
           )}
@@ -167,18 +178,13 @@ export default function Search() {
             style={{
               width: 28,
               height: 30,
-              marginRight: 15,
+              marginLeft: 5,
               tintColor: colors.grey0,
             }}
           />
         </TouchableOpacity>
       </View>
-      <ScrollView
-        style={{marginTop: 5, height: 120}}
-        horizontal
-        showsHorizontalScrollIndicator={false}>
-        <CategoriesCard />
-      </ScrollView>
+
       <FlatList
         style={{marginBottom: 70}}
         data={items}
@@ -187,13 +193,11 @@ export default function Search() {
           return (
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate('ProductsDetail', {data: {items}});
+                navigation.navigate('ProductsDetail', {data: item.data});
               }}>
               <View
                 style={{
-                  width: '90%',
-                  borderRadius: 10,
-                  borderWidth: 0.5,
+                  width: '95%',
                   alignSelf: 'center',
                   marginTop: 20,
                   marginBottom: index == data.length - 1 ? 20 : 0,
@@ -206,17 +210,19 @@ export default function Search() {
                     // width: 60,
                     // height: '90%',
                     borderRadius: 10,
-                    width: 100,
-                    height: 140,
+                    width: 130,
+                    height: 150,
                   }}
                 />
                 <View style={styles.nameView}>
                   <Text style={styles.nameText}>{item.data.name}</Text>
                   <View style={styles.priceView}>
                     <Text style={styles.discountText}>
-                      {item.data.discountPrice}
+                      {'₫' + item.data.discountPrice}
                     </Text>
-                    <Text style={styles.priceText}>{item.data.price}</Text>
+                    <Text style={styles.priceText}>
+                      {'₫' + item.data.price}
+                    </Text>
                   </View>
                   <Image
                     source={require('../../../images/stars.png')}
@@ -266,7 +272,7 @@ export default function Search() {
               onPress={() => {
                 setSelectedFilter(1);
                 const strAscending = items.sort((a, b) =>
-                  a.title > b.title ? 1 : -1,
+                  a.name > b.name ? 1 : -1,
                 );
                 setData(strAscending);
                 setVisible(false);
@@ -340,14 +346,15 @@ const styles = StyleSheet.create({
     //backgroundColor: colors.grey2,
   },
   priceView: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    //flexDirection: 'row',
+    //alignItems: 'center',
     //backgroundColor: colors.grey0,
+    marginLeft: 5,
   },
   nameText: {
     fontSize: 18,
     color: colors.grey0,
-    bottom: 30,
+    bottom: 10,
   },
   descText: {
     fontSize: 14,
@@ -359,9 +366,8 @@ const styles = StyleSheet.create({
     //fontWeight: '700',//backgroundColor: colors.grey0,
   },
   discountText: {
-    fontSize: 17,
+    fontSize: 18,
     fontWeight: '600',
-    marginLeft: 5,
     color: colors.buttonssmall,
     marginRight: 5,
   },

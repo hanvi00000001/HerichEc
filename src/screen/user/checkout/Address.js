@@ -4,6 +4,7 @@ import {colors} from '../../../global/styles';
 import {useIsFocused} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import firestore from '@react-native-firebase/firestore';
+import {Icon} from '@rneui/themed';
 
 export default function Address({navigation}) {
   const [addressList, setAddressList] = useState([]);
@@ -88,7 +89,7 @@ export default function Address({navigation}) {
         onPress={() => {
           navigation.navigate('AddNewAddress');
         }}>
-        <Text style={styles.btnText}>Thêm địa chỉ mới</Text>
+        <Icon name="add" size={60} />
       </TouchableOpacity>
     </View>
   );
@@ -105,7 +106,7 @@ const styles = StyleSheet.create({
   addNewBtn: {
     width: '90%',
     height: 50,
-    backgroundColor: colors.grey0,
+    //backgroundColor: colors.grey0,
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',

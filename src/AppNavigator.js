@@ -30,6 +30,8 @@ import ProductsDetail from './screen/user/products/ProductsDetail';
 import CategoriesCard from './screen/common/CategoriesCard';
 import ProductCat from './screen/user/products/ProductCat';
 import Newsp from './screen/user/home_tabs/isnew/Newsp';
+import Wish from './screen/user/home_tabs/Wishlist';
+import OrdersList from './screen/user/checkout/OrdersList';
 
 const Stack = createStackNavigator();
 
@@ -45,6 +47,11 @@ export default function AppNavigator() {
         <Stack.Screen
           name="Login"
           component={Login}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Wish"
+          component={Wish}
           options={{headerShown: false}}
         />
         <Stack.Screen
@@ -114,7 +121,7 @@ export default function AppNavigator() {
         />
         <Stack.Screen
           name="ProductDetailScreen"
-          component={ProductsDetail}
+          component={ProductDetailScreen}
           options={{headerShown: false}}
         />
 
@@ -171,6 +178,11 @@ export default function AppNavigator() {
           name="Newsp"
           component={Newsp}
           options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="OrdersList"
+          component={OrdersList}
+          options={{headerShown: true, title: 'Thông tin đơn hàng'}}
         />
       </Stack.Navigator>
     </NavigationContainer>

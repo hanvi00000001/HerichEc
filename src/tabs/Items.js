@@ -5,11 +5,13 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Alert,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+
 import firestore from '@react-native-firebase/firestore';
 import {colors} from '../global/styles';
 import {useNavigation, useIsFocused} from '@react-navigation/native';
+import React, {useEffect, useState} from 'react';
 
 export default function Items() {
   const isFocused = useIsFocused();
@@ -54,6 +56,7 @@ export default function Items() {
   return (
     <View style={styles.container}>
       <FlatList
+        showsVerticalScrollIndicator={false}
         data={items}
         renderItem={({item, index}) => {
           return (
@@ -86,21 +89,39 @@ export default function Items() {
                   }}>
                   <Image
                     source={require('../images/edit.png')}
-                    style={{width: 20, height: 20}}
+                    style={{width: 20, height: 20, tintColor: '#1273eb'}}
                   />
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={{margin: 10}}
                   onPress={() => {
-                    deleteItem(item.id);
+                    //deleteItem(item.id);
+                    Alert.alert(
+                      'Xoá?',
+                      'Bạn có chắc chắn muốn xoá tài koản này?',
+                      [
+                        // The "Yes" button
+                        {
+                          text: 'Xoá',
+                          onPress: () => {
+                            deleteItem(item.id);
+                          },
+                        },
+                        // The "No" button
+                        // Does nothing but dismiss the dialog when tapped
+                        {
+                          text: 'Trở lại',
+                        },
+                      ],
+                    );
                   }}>
                   <Image
                     source={require('../images/delete.png')}
                     style={[
                       styles.icon,
                       {
-                        tintColor: '#000',
-                        marginTop: 25,
+                        tintColor: '#ff0000',
+                        marginTop: 20,
                       },
                     ]}
                   />
@@ -117,7 +138,7 @@ export default function Items() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginBottom: 90,
+    marginBottom: 60,
   },
   itemView: {
     flexDirection: 'row',

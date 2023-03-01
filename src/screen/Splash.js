@@ -11,13 +11,12 @@ export default function Splash({navigation}) {
   const checkLogin = async () => {
     const email = await AsyncStorage.getItem('EMAIL');
     console.log(email);
-    navigation.navigate('Dashboard');
-    //navigation.navigate('SelectLogin');
-    // if (email !== null) {
-    //   navigation.navigate('Home');
-    // } else {
-    //   navigation.navigate('SelectLogin');
-    // }
+     
+    if (email !== null) {
+      navigation.navigate('Home');
+    } else {
+      navigation.navigate('SelectLogin');
+    }
   };
   return (
     <View style={styles.container}>

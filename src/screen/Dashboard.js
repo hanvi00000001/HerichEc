@@ -61,7 +61,7 @@ export default function Dashboard({navigation}) {
             setSelectedTab(1);
           }}>
           <Image
-            source={require('../images/transaction.png')}
+            source={require('../images/users.png')}
             style={[
               styles.bottomTabImg,
               {tintColor: selectedTab == 1 ? '#D83E64' : '#8e8e8e'},
