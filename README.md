@@ -23,7 +23,7 @@ MÔ TẢ CHI TIẾT
 
 HÌNH ẢNH DEMO
 -------------------------------
-![image](https://user-images.githubusercontent.com/94690599/222349836-20a762ac-d0c7-411b-bc38-a354ffe5bdb7.png =300) 
+![image](https://user-images.githubusercontent.com/94690599/222349836-20a762ac-d0c7-411b-bc38-a354ffe5bdb7.png ) 
 -------------------------------
 ![image](https://user-images.githubusercontent.com/94690599/222355780-67d66920-d62b-4696-956b-327f708d4509.png)
 -------------------------------
