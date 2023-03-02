@@ -24,13 +24,13 @@ MÔ TẢ CHI TIẾT
 HÌNH ẢNH DEMO
 
 <p align="center">
- <img src="https://user-images.githubusercontent.com/94690599/222349836-20a762ac-d0c7-411b-bc38-a354ffe5bdb7.png"  width="300" height="800" />
+ <img src="https://user-images.githubusercontent.com/94690599/222349836-20a762ac-d0c7-411b-bc38-a354ffe5bdb7.png"  width="400" height="800" />
 
 <p align="center">
 <img src="https://user-images.githubusercontent.com/94690599/222355780-67d66920-d62b-4696-956b-327f708d4509.png"  width="300" height="800" />
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/94690599/222357516-af5df66a-1ff1-48c2-b443-db48688ad6b6.png"  width="300" height="800" />
+<img src="https://user-images.githubusercontent.com/94690599/222357516-af5df66a-1ff1-48c2-b443-db48688ad6b6.png"  width="00" height="800" />
 
 <p align="center">
 <img src="https://user-images.githubusercontent.com/94690599/222357581-8bcb2867-1907-4da8-95a2-976e7e8d7bba.png"  width="300" height="800" />
