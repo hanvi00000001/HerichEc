@@ -24,7 +24,7 @@ MÔ TẢ CHI TIẾT
 HÌNH ẢNH DEMO
 -------------------------------
 <p align="center">
- <img src="https://user-images.githubusercontent.com/94690599/222349836-20a762ac-d0c7-411b-bc38-a354ffe5bdb7.png"  width="473" height="1024" />
+ <img src="https://user-images.githubusercontent.com/94690599/222349836-20a762ac-d0c7-411b-bc38-a354ffe5bdb7.png"  width="760" height="1600" />
 
 ![image](https://user-images.githubusercontent.com/94690599/222349836-20a762ac-d0c7-411b-bc38-a354ffe5bdb7.png ) 
 -------------------------------
