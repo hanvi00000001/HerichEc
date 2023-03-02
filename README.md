@@ -23,7 +23,8 @@ MÔ TẢ CHI TIẾT
 
 HÌNH ẢNH DEMO
 -------------------------------
-<img align="left" width="100" height="100" src="http://www.fillmurray.com/100/100">
+ <img src="https://user-images.githubusercontent.com/94690599/222349836-20a762ac-d0c7-411b-bc38-a354ffe5bdb7.png"  width="300" height="300" />
+
 ![image](https://user-images.githubusercontent.com/94690599/222349836-20a762ac-d0c7-411b-bc38-a354ffe5bdb7.png ) 
 -------------------------------
 ![image](https://user-images.githubusercontent.com/94690599/222355780-67d66920-d62b-4696-956b-327f708d4509.png)
