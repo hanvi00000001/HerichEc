@@ -23,6 +23,7 @@ MÔ TẢ CHI TIẾT
 
 HÌNH ẢNH DEMO
 -------------------------------
+<p align="center">
  <img src="https://user-images.githubusercontent.com/94690599/222349836-20a762ac-d0c7-411b-bc38-a354ffe5bdb7.png"  width="300" height="300" />
 
 ![image](https://user-images.githubusercontent.com/94690599/222349836-20a762ac-d0c7-411b-bc38-a354ffe5bdb7.png ) 
@@ -44,3 +45,4 @@ HÌNH ẢNH DEMO
 ![image](https://user-images.githubusercontent.com/94690599/222361918-b49d6622-e663-4aac-8090-c59d1650c657.png)
 -------------------------------
 ![image](https://user-images.githubusercontent.com/94690599/222361942-f91b0b41-0e8e-49ce-98e9-3ec36140a01a.png)
+ </p>
