@@ -55,6 +55,9 @@ export default function Items() {
 
   return (
     <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>Quản lý sản phẩm</Text>
+      </View>
       <FlatList
         showsVerticalScrollIndicator={false}
         data={items}
@@ -73,9 +76,7 @@ export default function Items() {
                   </Text>
                   <Text style={styles.priceText}>{item.data.price}</Text>
                 </View>
-                <Text style={styles.categories}>
-                  {item.data.categories + '\nid: ' + item.data.itmId}
-                </Text>
+                <Text style={styles.categories}>{item.data.categories}</Text>
               </View>
 
               <View>
@@ -140,6 +141,19 @@ const styles = StyleSheet.create({
     flex: 1,
     marginBottom: 60,
   },
+  header: {
+    height: 50,
+    width: '100%',
+    backgroundColor: colors.headerText,
+    elevation: 5,
+    paddingLeft: 20,
+    justifyContent: 'center',
+  },
+  headerText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: colors.grey0,
+  },
   itemView: {
     flexDirection: 'row',
     width: '90%',
@@ -147,8 +161,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     backgroundColor: colors.cardbackground,
     elevation: 4,
-    marginTop: 10,
-    marginBottom: 10,
+    marginTop: 5,
+    marginBottom: 5,
     borderRadius: 10,
   },
   itemImage: {

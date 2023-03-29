@@ -22,7 +22,9 @@ import Loader from '../../common/Loader';
 export default function EditProfile({navigation}) {
   const route = useRoute();
   const [imagePicked, setImagePicked] = useState(false);
-  const [imageData, setImageData] = useState(null);
+  const [imageData, setImageData] = useState({
+    assets: [{uri: route.params.profilePic}],
+  });
   const [name, setName] = useState(route.params.name);
   const [email, setEmail] = useState(route.params.email);
   const [mobile, setMobile] = useState(route.params.mobile);
@@ -203,7 +205,7 @@ const styles = StyleSheet.create({
   //   color: colors.grey0,
   // },
   uploadBtn: {
-    backgroundColor: colors.buttonssmall,
+    backgroundColor: colors.grey0,
     width: '80%',
     height: 50,
     alignSelf: 'center',
@@ -225,12 +227,12 @@ const styles = StyleSheet.create({
   },
   view10: {
     flexDirection: 'row',
-    borderBottomWidth: 0.8,
+    borderBottomWidth: 0.5,
     marginLeft: 20,
     marginTop: 20,
     height: 50,
     width: '90%',
-    borderBottomColor: colors.buttonssmall,
+    borderBottomColor: '#555555',
   },
   view11: {marginLeft: 30, maxWidth: '65%'},
   inputIcon: {

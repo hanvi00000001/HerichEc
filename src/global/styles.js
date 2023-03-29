@@ -1,7 +1,7 @@
 export const colors = {
   buttons: '#FF6600',
   buttonssmall: '#D83E64',
-  grey0: '#000',
+  grey0: '#000000',
   grey1: '#43484d',
   grey2: '#5e6977',
   grey3: '#86939e',

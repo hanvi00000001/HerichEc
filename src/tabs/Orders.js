@@ -45,6 +45,10 @@ export default function Orders() {
           console.log('item' + item);
           return (
             <View style={styles.orderItem}>
+              <Text style={{color: '#000', marginLeft: 5}}>
+                {'Xem chi tiết >'}
+              </Text>
+
               <FlatList
                 data={item.data.items}
                 renderItem={({item, index}) => {
@@ -57,7 +61,7 @@ export default function Orders() {
                       <View>
                         <Text style={styles.nameText}>{item.data.name}</Text>
                         <View style={{flexDirection: 'row'}}>
-                          <Text style={styles.sizeText}>size</Text>
+                          {/* <Text style={styles.sizeText}>size</Text> */}
 
                           <Text style={styles.priceText}>
                             {item.data.discountPrice + ' x' + item.data.qty}

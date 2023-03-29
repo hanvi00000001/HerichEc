@@ -65,7 +65,7 @@ export default function OrdersList() {
               Địa chỉ nhận hàng
             </Text>
           </View>
-          <Text style={styles.addressText}>{route.params.data.address}</Text>
+          <Text style={styles.addressText}>dfg dfg dfg</Text>
         </View>
 
         <View style={{backgroundColor: colors.cardbackground}}>
@@ -73,15 +73,19 @@ export default function OrdersList() {
             <View style={{margin: 10, flexDirection: 'row'}}>
               <Image
                 style={styles.itemImage}
-                source={{uri: route.params.data.imageUrl}}
+                // source={{uri: route.params.data.imageUrl}}
               />
               <View>
-                <Text style={styles.nameText}>{route.params.data.name} </Text>
+                <Text style={styles.nameText}>
+                  {/* {route.params.data.name}  */}
+                  name
+                </Text>
                 <Text style={styles.qtyText}>
-                  {'x' + route.params.data.qty}
+                  {/* {'x' + route.params.data.qty} */}qty
                 </Text>
                 <Text style={styles.nameText}>
-                  {route.params.data.discountPrice}
+                  prc
+                  {/* {route.params.data.discountPrice} */}
                 </Text>
               </View>
             </View>

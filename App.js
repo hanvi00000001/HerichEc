@@ -6,10 +6,7 @@ import {colors} from './src/global/styles';
 export default function App() {
   return (
     <View style={styles.container}>
-      <StatusBar
-        barStyle="light-content"
-        backgroundColor={colors.buttonssmall}
-      />
+      <StatusBar barStyle="light-content" backgroundColor="#000" />
       <AppNavigator />
     </View>
   );

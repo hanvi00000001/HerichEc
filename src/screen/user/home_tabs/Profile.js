@@ -20,6 +20,7 @@ import {colors} from '../../../global/styles';
 import {Icon, Button} from '@rneui/themed';
 import {useIsFocused, useNavigation} from '@react-navigation/native';
 import Header from '../../common/Header';
+//import auth from '@react-native-firebase/auth';
 
 import {signOutAction} from '../../actions';
 
@@ -59,10 +60,15 @@ export default function Profile() {
     // return () => subscriber();
   };
 
-  const signOut = async () => {
+  const logOut = async () => {
     try {
-      await firebase.auth().signOut();
-      navigation.navigate('SelectLogin');
+      await auth().signOut();
+      // clear all state and navigate to the login screen
+      setUsers(null); // clear user state
+      navigation.reset({
+        index: 0,
+        routes: [{name: 'SelectLogin'}],
+      }); // navigate to the login screen
     } catch (e) {
       console.log(e);
     }
@@ -142,6 +148,7 @@ export default function Profile() {
                   name: usersData.name,
                   email: usersData.email,
                   mobile: usersData.mobile,
+                  profilePic: usersData.profilePic,
                 })
               }>
               <Image
@@ -310,12 +317,14 @@ export default function Profile() {
         <View style={{marginBottom: 200}}>
           <Button
             radius={'sm'}
-            buttonStyle={{backgroundColor: 'rgba(39, 39, 39, 1)'}}
+            buttonStyle={{backgroundColor: colors.grey0}}
             containerStyle={{
               width: '100%',
               marginVertical: 10,
             }}
-            titleStyle={{color: 'white', marginHorizontal: 10}}>
+            titleStyle={{color: 'white', marginHorizontal: 10}}
+            //onPress={() => navigation.navigate('SelectLogin')}
+            onPress={() => logOut()}>
             <Icon name="logout" color="white" />
             Đăng xuất
           </Button>

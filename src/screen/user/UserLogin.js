@@ -69,31 +69,101 @@ export default function UserLogin({navigation}) {
   const localImage = require('../../images/backgroundtet.png');
 
   return (
-    <ImageBackground
-      source={localImage}
-      resizeMode="cover"
-      style={[styles.container, {height: 700, marginTop: 10, width: '100%'}]}>
-      <View style={styles.container}>
-        <View
-          style={{
-            width: '100%',
-            height: 160,
-          }}>
-          <Image
-            source={require('../../images/logo1.png')}
-            style={{width: 200, height: 200, alignSelf: 'center'}}
-          />
-        </View>
+    <View style={styles.container}>
+      <View
+        style={{
+          width: '100%',
+          height: 200,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <Image
+          source={require('../../images/logo1.png')}
+          style={{width: 150, height: 150}}
+        />
+        <Text style={{color: '#000', fontSize: 20}}>
+          Buy everything with you need...
+        </Text>
+        <Text style={{color: '#000', fontSize: 20}}>VI THỊ THU HẰNG</Text>
+      </View>
 
-        <View
-          style={[
-            styles.container,
-            {top: 60, borderRadius: 40, backgroundColor: '#fff'},
-          ]}>
-          <Text style={styles.title}>Đăng nhập</Text>
+      <View
+        style={[
+          styles.container,
+          {top: 60, borderRadius: 40, backgroundColor: '#fff'},
+        ]}>
+        <Text style={styles.title}>Đăng nhập</Text>
+
+        <View>
+          <View style={styles.view10}>
+            <View>
+              <Icon
+                name="alternate-email"
+                style={styles.email}
+                color={colors.grey1}
+                type="material"
+              />
+            </View>
+            <View style={styles.view11}>
+              <TextInput
+                style={styles.inputStyle}
+                placeholder={'Nhập Email'}
+                value={email}
+                onChangeText={txt => setEmail(txt)}
+              />
+            </View>
+          </View>
+
+          <View style={styles.view10}>
+            <View>
+              <Icon
+                name="lock"
+                style={styles.email}
+                color={colors.grey1}
+                type="material"
+              />
+            </View>
+
+            <View style={[styles.view11, {flexDirection: 'row'}]}>
+              <TextInput
+                secureTextEntry={isSecureEntry}
+                style={styles.inputStyle}
+                placeholder={'Nhập mật khẩu'}
+                value={password}
+                onChangeText={txt => setPassword(txt)}
+              />
+              <Icon
+                style={styles.visibility}
+                type="material"
+                name={isSecureEntry ? 'visibility-off' : 'visibility'}
+                onPress={() => {
+                  setIsSecureEntry(prev => !prev);
+                }}
+                // {...isSecureEntry? 'visibility' : 'visibility-off'}
+              />
+            </View>
+          </View>
+
+          <TouchableOpacity
+            style={styles.loginBtn}
+            onPress={() => {
+              if (email !== '' && password !== '') {
+                adminLogin();
+              } else {
+                Alert.alert('Thông Báo', 'Vui lòng nhập đầy đủ thông tin!');
+              }
+            }}>
+            <Icon name="vpn-key" color={colors.headerText} type="material" />
+            <Text style={styles.btnText}>Đăng nhập</Text>
+          </TouchableOpacity>
 
           <View
-            style={{flexDirection: 'row', marginLeft: 20, marginBottom: 10}}>
+            style={{
+              flexDirection: 'row',
+              marginLeft: 20,
+              marginTop: 10,
+              justifyContent: 'center',
+            }}>
             <Text style={styles.noAccount}>Chưa có tài khoản?</Text>
             <Text
               style={styles.createNewAccount}
@@ -103,69 +173,8 @@ export default function UserLogin({navigation}) {
               Đăng ký
             </Text>
           </View>
-          <View>
-            <View style={styles.view10}>
-              <View>
-                <Icon
-                  name="alternate-email"
-                  style={styles.email}
-                  color={colors.buttonssmall}
-                  type="material"
-                />
-              </View>
-              <View style={styles.view11}>
-                <TextInput
-                  style={styles.inputStyle}
-                  placeholder={'Nhập Email'}
-                  value={email}
-                  onChangeText={txt => setEmail(txt)}
-                />
-              </View>
-            </View>
 
-            <View style={styles.view10}>
-              <View>
-                <Icon
-                  name="lock"
-                  style={styles.email}
-                  color={colors.buttonssmall}
-                  type="material"
-                />
-              </View>
-
-              <View style={[styles.view11, {flexDirection: 'row'}]}>
-                <TextInput
-                  secureTextEntry={isSecureEntry}
-                  style={styles.inputStyle}
-                  placeholder={'Nhập mật khẩu'}
-                  value={password}
-                  onChangeText={txt => setPassword(txt)}
-                />
-                <Icon
-                  style={styles.visibility}
-                  type="material"
-                  name={isSecureEntry ? 'visibility-off' : 'visibility'}
-                  onPress={() => {
-                    setIsSecureEntry(prev => !prev);
-                  }}
-                  // {...isSecureEntry? 'visibility' : 'visibility-off'}
-                />
-              </View>
-            </View>
-
-            <TouchableOpacity
-              style={styles.loginBtn}
-              onPress={() => {
-                if (email !== '' && password !== '') {
-                  adminLogin();
-                } else {
-                  Alert.alert('Thông Báo', 'Vui lòng nhập đầy đủ thông tin!');
-                }
-              }}>
-              <Text style={styles.btnText}>Đăng nhập</Text>
-            </TouchableOpacity>
-
-            {/* <View
+          {/* <View
               style={{
                 marginTop: 20,
                 marginBottom: 10,
@@ -175,7 +184,7 @@ export default function UserLogin({navigation}) {
                 OR
               </Text>
             </View> */}
-            {/* <View
+          {/* <View
               style={{
                 marginHorizontal: 10,
                 marginTop: 10,
@@ -201,12 +210,11 @@ export default function UserLogin({navigation}) {
                 iconType="font-awesome"
               />
             </View> */}
-          </View>
         </View>
-
-        <Loader modalVisible={modalVisible} setModalVisible={setModalVisible} />
       </View>
-    </ImageBackground>
+
+      <Loader modalVisible={modalVisible} setModalVisible={setModalVisible} />
+    </View>
   );
 }
 
@@ -219,12 +227,14 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: '800',
     color: colors.grey0,
-    marginTop: 30,
+    marginTop: 40,
+    marginBottom: 20,
     marginLeft: 20,
   },
   view10: {
     flexDirection: 'row',
-    borderBottomWidth: 0.3,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.buttonssmall,
     marginLeft: 20,
     marginTop: 20,
     height: 50,
@@ -250,12 +260,13 @@ const styles = StyleSheet.create({
     top: 20,
   },
   loginBtn: {
-    backgroundColor: colors.grey0,
+    flexDirection: 'row',
+    backgroundColor: colors.buttonssmall,
     width: '90%',
     height: 60,
     alignSelf: 'center',
     borderRadius: 15,
-    marginTop: 40,
+    marginTop: 70,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -263,6 +274,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     color: '#fff',
+    marginLeft: 5,
   },
   createNewAccount: {
     fontSize: 16,

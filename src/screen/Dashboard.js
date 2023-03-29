@@ -41,6 +41,7 @@ export default function Dashboard({navigation}) {
       ) : (
         <Notifications />
       )}
+
       <View style={styles.bottomView}>
         <TouchableOpacity
           style={styles.bottomTab}
@@ -121,6 +122,7 @@ const styles = StyleSheet.create({
     flex: 1,
     //backgroundColor: '#000',
   },
+
   bottomView: {
     width: '100%',
     height: 60,

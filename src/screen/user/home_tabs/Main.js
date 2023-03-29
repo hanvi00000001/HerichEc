@@ -283,7 +283,7 @@ export default function Main() {
                         borderTopRightRadius: 20,
                       }}
                     />
-                    {/* <Text style={{color: '#000'}}>{item.data.itmId}</Text> */}
+
                     <Text
                       style={{
                         color: theme === 'LIGHT' ? '#000' : '#fff',
@@ -293,7 +293,6 @@ export default function Main() {
                         fontWeight: '600',
                       }}>
                       {item.data.name}
-                      {item.data.categories}
                     </Text>
 
                     <View
@@ -365,8 +364,18 @@ export default function Main() {
             );
           }}
         />
-
-        <View style={{marginTop: 20, marginLeft: 10}}></View>
+        {/* 
+        <View style={{marginTop: 20, marginLeft: 10}}>
+          <Text></Text>
+          <FlatList
+            showsHorizontalScrollIndicator={false}
+            horizontal
+            data={c}
+            renderItem={({item, index}) => {
+              return <View></View>;
+            }}
+          />
+        </View> */}
 
         <View style={{marginTop: 20, marginLeft: 10}}>
           <Text

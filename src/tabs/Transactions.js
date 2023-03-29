@@ -24,9 +24,8 @@ export default function Transactions() {
   const isFocused = useIsFocused();
   const [users, setUsers] = useState([]);
   const [showBox, setShowBox] = useState(true);
+  const [firestoreData, setFirestoreData] = useState([]);
 
-  const [count, setCount] = useState(0);
-  const onPress = () => setCount(prevCount => prevCount + 1);
   useEffect(() => {
     getUsers();
   }, [isFocused]);
@@ -66,11 +65,29 @@ export default function Transactions() {
 
   const hide = () => {};
 
+  // const renderRow = (item, index) => {
+  //   return (
+  //     <View style={{}}>
+  //       <Text style={styles.index}>{index + 1}</Text>
+  //       <Text style={styles.text}>{item}</Text>
+  //     </View>
+  //   );
+  // };
+
   const [isSecureEntry, setIsSecureEntry] = useState(true);
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerText}>Quản lý người dùng</Text>
+      </View>
+
+      <View style={styles.view1}>
+        <View style={styles.viewname}>
+          <Text style={styles.textN}>Tên</Text>
+        </View>
+        <View style={styles.viewname}>
+          <Text style={styles.textG}>Gmail</Text>
+        </View>
       </View>
       <FlatList
         showsVerticalScrollIndicator={false}
@@ -79,7 +96,7 @@ export default function Transactions() {
           return (
             <View style={styles.view}>
               <View style={styles.viewimg}>
-                <Text style={styles.textu}>{count}</Text>
+                <Text style={styles.index}>{index + 1}</Text>
               </View>
 
               <View
@@ -87,12 +104,17 @@ export default function Transactions() {
                   flexDirection: 'row',
                   width: '80%',
                   height: '100%',
+                  backgroundColor: '#fff',
                 }}>
                 <View style={styles.viewname}>
-                  <Text style={styles.textu}>{item.data.name}</Text>
+                  <Text style={[styles.textu, {width: 150}]}>
+                    {item.data.name}
+                  </Text>
                 </View>
                 <View style={styles.viewname}>
-                  <Text style={styles.textu}>{item.data.email}</Text>
+                  <Text style={[styles.textu, {width: 170}]}>
+                    {item.data.email}
+                  </Text>
                 </View>
               </View>
               <View
@@ -164,6 +186,12 @@ const styles = StyleSheet.create({
     marginBottom: 60,
     //backgroundColor: '#fff',
   },
+  index: {
+    fontWeight: 'bold',
+    color: '#000',
+    paddingHorizontal: 10,
+  },
+
   header: {
     height: 50,
     width: '100%',
@@ -177,12 +205,30 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: colors.grey0,
   },
+  view1: {
+    backgroundColor: '#fff',
+    flexDirection: 'row',
+    borderBottomWidth: 0.8,
+    borderBottomColor: '#1273eb',
+  },
+  textN: {
+    color: colors.grey0,
+    fontSize: 13,
+    fontWeight: 'bold',
+    marginLeft: 60,
+  },
+  textG: {
+    color: colors.grey0,
+    fontSize: 13,
+    fontWeight: 'bold',
+    marginLeft: 125,
+  },
   view: {
     width: '100%',
     height: 70,
     borderWidth: 0.5,
     borderColor: colors.grey4,
-    marginBottom: 2,
+    marginBottom: 0.5,
     backgroundColor: '#fff',
     flexDirection: 'row',
   },
@@ -192,12 +238,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   viewimg: {
-    alignSelf: 'center',
-    width: 40,
+    flexDirection: 'row',
     alignItems: 'center',
+    marginVertical: 10,
+    backgroundColor: '#fff',
   },
   viewname: {
-    width: '40%',
+    // width: '40%',
     alignItems: 'center',
     alignSelf: 'center',
   },

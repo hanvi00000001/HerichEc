@@ -91,17 +91,8 @@ export default function Wish() {
               onPress={() => {
                 navigation.navigate('ProductsDetail', {
                   // id: item.data.id,
-                  itmId: item.data.itmId,
-                  name: item.data.name,
-                  price: item.data.price,
-                  discountPrice: item.data.discountPrice,
-                  description: item.data.description,
-                  imageUrl: item.data.imageUrl,
-                  destitle: item.data.destitle,
-                  slide1: item.data.slide1,
-                  slide2: item.data.slide2,
-                  slide3: item.data.slide3,
-                  slide4: item.data.slide4,
+                  data: item.data,
+                  id: item.id,
                 });
               }}>
               <View style={{width: '100%'}}>

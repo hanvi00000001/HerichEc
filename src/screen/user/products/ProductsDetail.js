@@ -181,6 +181,7 @@ export default function ProductsDetail() {
               marginBottom: 10,
             }}>
             {route.params.data.name}
+            {/* {route.params.id} */}
           </Text>
           <View style={{flexDirection: 'row'}}>
             <Text
@@ -296,7 +297,7 @@ export default function ProductsDetail() {
 
       <TouchableOpacity
         style={{
-          backgroundColor: colors.buttonssmall,
+          backgroundColor: colors.grey0,
           width: '100%',
           height: 50,
           justifyContent: 'center',
@@ -323,7 +324,7 @@ export default function ProductsDetail() {
             marginLeft: 10,
             width: 30,
             height: 30,
-            tintColor: colors.headerText,
+            tintColor: colors.buttonssmall,
           }}
         />
       </TouchableOpacity>

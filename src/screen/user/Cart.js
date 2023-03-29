@@ -102,10 +102,19 @@ export default function Cart({navigation}) {
         renderItem={({item, index}) => {
           return (
             <View style={styles.itemView}>
-              <Image
-                source={{uri: item.data.imageUrl}}
-                style={styles.itemImage}
-              />
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('ProductsDetail', {
+                    data: item.data,
+                    id: item.id,
+                  });
+                }}>
+                <Image
+                  source={{uri: item.data.imageUrl}}
+                  style={styles.itemImage}
+                />
+              </TouchableOpacity>
+
               <TouchableOpacity
                 onPress={() => {
                   Alert.alert('Xoá?', 'Xoá sản phẩm này khỏi giỏ hàng?', [
@@ -126,9 +135,8 @@ export default function Cart({navigation}) {
                 }}
                 style={{
                   position: 'absolute',
-                  top: -3,
-                  left: 0,
-                  backgroundColor: '#fff',
+                  top: -2,
+                  left: -2,
                   borderRadius: 20,
                   //borderWidth: 0.5,
                   width: 30,
@@ -329,7 +337,7 @@ const styles = StyleSheet.create({
     height: 30,
   },
   checkoutBtn: {
-    backgroundColor: colors.buttonssmall,
+    backgroundColor: colors.grey0,
     padding: 5,
     borderBottomEndRadius: 40,
     borderBottomWidth: 5,

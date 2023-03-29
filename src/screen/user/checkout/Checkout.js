@@ -141,7 +141,7 @@ export default function Checkout({navigation}) {
               />
               <View style={styles.nameView}>
                 <Text style={styles.nameText}>{item.data.name}</Text>
-                <Text style={styles.nameText}>size</Text>
+                <Text style={styles.nameText}>XS</Text>
                 <View style={styles.priceView}>
                   <Text style={styles.priceText}>
                     {item.data.discountPrice}
@@ -326,7 +326,7 @@ export default function Checkout({navigation}) {
             styles.checkoutBtn,
             {
               backgroundColor:
-                selectedAddress == 'Chưa có địa chỉ' ? '#DADADA' : '#D83E64',
+                selectedAddress == 'Chưa có địa chỉ' ? '#DADADA' : '#000000',
             },
           ]}
           onPress={() => {
@@ -362,8 +362,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     backgroundColor: colors.headerText,
     elevation: 4,
-    marginTop: 10,
-    marginBottom: 10,
+    marginTop: 5,
+    marginBottom: 5,
     borderRadius: 10,
     alignItems: 'center',
   },
@@ -441,7 +441,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: '50%',
-    height: 70,
+    height: 65,
     borderTopLeftRadius: 40,
   },
   selectedBtn: {

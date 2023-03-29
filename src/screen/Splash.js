@@ -11,7 +11,7 @@ export default function Splash({navigation}) {
   const checkLogin = async () => {
     const email = await AsyncStorage.getItem('EMAIL');
     console.log(email);
-     
+    //navigation.navigate('Dashboard');
     if (email !== null) {
       navigation.navigate('Home');
     } else {

@@ -56,6 +56,7 @@ export default function Home() {
               {tintColor: selectedTab == 0 ? '#D83E64' : '#86939e'},
             ]}
           />
+          <Text style={styles.title}>Trang chủ</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.bottomTab}
@@ -73,6 +74,7 @@ export default function Home() {
               {tintColor: selectedTab == 1 ? '#D83E64' : '#86939e'},
             ]}
           />
+          <Text style={styles.title}>Tìm kiếm</Text>
         </TouchableOpacity>
         <TouchableOpacity //
           style={styles.bottomTab}
@@ -94,6 +96,7 @@ export default function Home() {
           <View style={styles.count}>
             <Text style={styles.textcount}>{wishCount ? wishCount : '0'}</Text>
           </View>
+          <Text style={styles.title}>Thích</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.bottomTab}
@@ -111,6 +114,7 @@ export default function Home() {
               {tintColor: selectedTab == 3 ? '#D83E64' : '#86939e'},
             ]}
           />
+          <Text style={styles.title}>Đơn hàng</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.bottomTab}
@@ -128,6 +132,7 @@ export default function Home() {
               {tintColor: selectedTab == 4 ? '#D83E64' : '#86939e'},
             ]}
           />
+          <Text style={styles.title}>Tôi</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -140,7 +145,7 @@ const styles = StyleSheet.create({
   },
   bottomTabsView: {
     flexDirection: 'row',
-    height: 50,
+    height: 80,
     width: '100%',
     backgroundColor: colors.headerText,
     justifyContent: 'space-evenly',
@@ -149,6 +154,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
   },
+  title: {color: '#555555'},
   bottomTab: {
     width: '20%',
     height: '100%',
