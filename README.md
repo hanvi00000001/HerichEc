@@ -48,8 +48,8 @@ HÌNH ẢNH DEMO
 <img  src="https://user-images.githubusercontent.com/94690599/222361891-241ed26c-d1f7-4828-be06-c901678f17e8.png"  width="300" height="800" />
  
  <p align="center">
-<img  src="https://user-images.githubusercontent.com/94690599/222361918-b49d6622-e663-4aac-8090-c59d1650c657.png"  width="300" height="800" />
-  
+<img  src="https://user-images.githubusercontent.com/94690599/228457392-53d0cac5-0c3c-412b-9cca-04a4dee7c2a4.png"  width="300" height="800" />
+   
  <p align="center">
-<img src="https://user-images.githubusercontent.com/94690599/222361942-f91b0b41-0e8e-49ce-98e9-3ec36140a01a.png"  width="300" height="800" />
+<img src="https://user-images.githubusercontent.com/94690599/228461320-8f187c9f-d250-4a80-b866-c1c8e06e6e34.png"  width="300" height="800" />
 <p align="center">
